@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="w3.css" rel="stylesheet" type="text/css">
+   
+        <style>
+        .page {display:none;}
+        /* unvisited link */
+        a:link {color: red;}
+        /* visited link */
+        a:visited {color: green;}
+        /* mouse over link */
+        a:hover {color: hotpink;}
+        /* selected link */
+        a:active {color: blue;}
+        a{font-family:cursive;font-size:large;}
+        </style> 
+    </head>
+<body>
+
+    <div class="w3-container">
+        <header class="w3-container w3-light-grey w3-round-large">
+            <div class="w3-center"><p><h1>OpenMaps</h1>
+                <img src="log.png" alt="Logo" class="w3-right w3-margin-0" style="width:150px; height:70px">
+                <h3>Land, Engineering surveyors and Location Based Services Consultants</h3>
+            </div>
+        </header>
+
+        <ul class="w3-navbar w3-black w3-round-large">
+            <li><a href="javascript:void(0)" class="tablink" onclick="openPage(event, 'Home');">Home</a></li>
+            <li><a href="javascript:void(0)" class="tablink" onclick="openPage(event, 'Surveys');">Surveys</a></li>
+            <li><a href="javascript:void(0)" class="tablink" onclick="openPage(event, 'LBS');">LBS & GIS</a></li>
+            <li><a href="javascript:void(0)" class="tablink" onclick="openPage(event, 'omblog');">Blog</a></li>
+        </ul>
+
+        <div id="Home" class="w3-container w3-border page w3-animate-left">
+            <div class="w3-row-padding w3-content" style="max-width:1400px">
+                <div class="w3-twothird">
+                    <img src="./img/compass.jpg" alt="home" style="width:100%">
+                    <h2>OpenMaps Limited</h2>
+                    <div class="w3-justify">
+                    <p>
+                        As professional practicing surveyors in areas of engineering surveys, topographical surveys, cadastral surveys and location-based services, we have the necessary expertise which provide the best compromise between cost, speed and reliability in the delivery of our services.
+                    </p>
+                    </div>
+                </div>
+                <div class="w3-third">
+                    <div class="w3-container w3-brown">
+                        <h3>About Us</h3>
+                        <p class="w3-justify">
+                        OpenMaps is a full service firm ready to meet your land surveying and online mapping
+                        needs throughout Kenya and East Africa region. We continue to provide professional land 
+                        surveying and online mapping services taking pride in providing our clients with superior and quality work. 
+                        
+                        Our Management of projects from beginning to end is unique and extremely efficient at a reasonable price.
+                        </p>
+                    </div>
+                    <br>
+                    <div class="w3-container w3-teal w3-justify">
+                        <h3>Vision & Mission</h3>
+                        <p class="w3-justify">
+                            To maintain high accuracy and quality products within the shortest time possible.
+                        </p>
+                        <h3>Links</h3>
+                        <p class="w3-justify">
+                            <ul class="w3-ul w3-hoverable">
+                                <li><a href="http://www.openmapstrack.com" target="_blank">OpenMaps Tracking</a></li>
+                            </ul>
+                        </p>
+                    </div>
+                    <br>
+                    <div class="w3-container w3-light-green w3-justify">
+                        <h3>Contact Us</h3>
+                        <p class="w3-justify">
+                            <ul class="w3-ul w3-hoverable">
+                                <li><span>Email:</span><i>openmaps14@gmail.com or info@openmapstrack.com<i></li>
+                                <li><span>Whatsapp/Call:</span><i> +254739186580<i></li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="Surveys" class="w3-container w3-border page w3-animate-left">
+           <div class="w3-row-padding w3-content" style="max-width:1400px">
+                <div class="w3-twothird">
+                    <img src="./img/gps.jpg" alt="surveys" style="width:100%">
+                    <br>
+                    <img src="./img/plan.jpg" alt="surveys" style="width:100%;height:600px">
+                    <h2>Land Surveying</h2>
+                    <div class="w3-justify">
+                        <p></p>
+                    </div>
+                </div>
+                <div class="w3-third">
+                    <div class="w3-container w3-brown">
+                        <h3>Topography</h3>
+                        <p class="w3-justify">
+                            <ul class="w3-ul w3-hoverable">
+                                <li>Survey to provide surface elevations on sites.</li>
+                                <li>Volumetric surveys to determine quantities of soil removal and/or soil pile volumes.</li>
+                                <li>Determination of surface percent slope for development.</li>
+                            </ul>
+                        </p>
+                        <p>&nbsp;</p>
+                    </div>
+                    <br>
+                    <div class="w3-container w3-teal w3-justify">
+                        <h3>Engineering Surveys</h3>
+                        <p class="w3-justify">
+                            <ul class="w3-ul w3-hoverable">
+                                <li>Setting out: Design plan implementation of Controls and Benchmarks for development sites.</li>
+                                <li>Layout Primary, Secondary, Detail points and TBMs in the site to provide contractor references to guide construction activities.</li>
+                            </ul>
+                        </p>
+                        <p>&nbsp;</p>
+                    </div>
+                    <br>
+                    <div class="w3-container w3-light-green w3-justify">
+                        <h3>Cadastral</h3>
+                        <p class="w3-justify">
+                            <ul class="w3-ul w3-hoverable">
+                                <li>Beacon Re-establishment and Land Delineation.</li>
+                                <li>Establishment of Controls, Land Subdivision and Land Consolidation.</li>
+                                <li>Survey Plans & Deed Plans.</li>
+                                <li>Change of user.</li>
+                            </ul>
+                        </p>
+                        <p>&nbsp;</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="LBS" class="w3-container w3-border page w3-animate-left">
+            <div class="w3-row-padding w3-content" style="max-width:1400px">
+                <div class="w3-twothird">
+                   <div class="w3-justify">
+                        <img src="./img/na.gif" alt="GIS" style="width:100%; height:400px">
+                    </div>
+                    <p>GIS Modelling</p>
+                    <div class="w3-justify">
+                        <img src="./img/waters.jpg" alt="GIS" style="width:100%">
+                    </div>
+                    <p>Location Based Services</p>
+                </div>
+                <div class="w3-third">
+                    <div class="w3-container w3-brown">
+                        <h4>Real-Time Applications</h4>
+                        <p class="w3-justify">
+                            <ul class="w3-ul w3-hoverable">
+                                <li>GIS-enabled Technologies Integration.</li>
+                                <li>Spatially-enabled database Management.</li>
+                                <li>Sensor-enabled GIS systems e.g temperature, noise, smoke e.t.c.</li>
+                                <li>Online maps integration with ground based Sensor e.g. RFIDs, radiation e.t.c.</li>
+                            </ul>
+                        </p>
+                        <p>&nbsp;</p>
+                    </div>
+                    <br>
+                    <div class="w3-container w3-teal w3-justify">
+                        <h4>Asset Tracking and Management</h4>
+                        <p class="w3-justify">
+                            <ul class="w3-ul w3-hoverable">
+                                <li>Geolocation technologies.</li>
+                                <li>Vehicle Tracking Systems and Services.</li>
+                                <li>Spatially-enabled enterprise Database Management.</li>
+                                <li>Geocoding</li>
+                            </ul>
+                        </p>
+                        <p>&nbsp;</p>
+                    </div>
+                    <br>
+                    <div class="w3-container w3-light-green w3-justify">
+                        <h4>Geospatial Information Systems & Data Analysis</h4>
+                        <p class="w3-justify">
+                            <ul class="w3-ul w3-hoverable">
+                                <li>Utilities Mapping and Monitoring.</li>
+                                <li>GIS software add-ons development.</li>
+                                <li>Spatial Data Analysis.</li>
+                            </ul>
+                        </p>
+                        <p>&nbsp;</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+         <div id="omblog" class="w3-container w3-border page w3-animate-top">
+            <div class="w3-row-padding w3-content" style="max-width:1400px">
+               <div class="w3-twothird">
+
+                        <div class="w3-container w3-grey" style="position:relative;">
+                            <img src="josh.jpg" alt="logos" class="w3-circle" style="width:10%"> 
+                            <h1 class="w3-jumbo w3-text-grey w3-text-shadow w3-display-topright">GIS This Week</h1>
+                        
+
+                        <div class="w3-section w3-container">
+                        <div class="w3-card-4">
+                            <img src="log.png" alt="Logo" class="w3-circle" style="width:10%; background:white">
+                                <div class="w3-container w3-white">
+                                    <h5>Georeferencing</h5>
+                                    <hr>
+                                    <p>Georeferenced data: Location on Earth surface is represented in a Coordinate Referenced System</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w3-section w3-container">
+                        <div class="w3-card-4">
+                            <div class="w3-center w3-container w3-padding-jumbo w3-black w3-xlarge">
+                                <p><span style="font-size:20px;line-height:0.6em;opacity:1">&#10077;</span>
+                                <i> We keep it Simple through Geolocation </i>
+                                <span style="font-size:20px;line-height:0.6em;opacity:1">&#10078;</span></p>
+                            </div>
+                                <div class="w3-container w3-white">
+                                    <p></p>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </div>
+                <div class="w3-third">
+                    <div class="w3-container w3-brown">
+                        <h3>GIS Programming</h3><hr>
+                        <section class="w3-container w3-grey w3-codespan">
+                         <code>
+                         &lt;!DOCTYPE html&gt;
+                            &lt;html lang="en"&gt;
+                                &lt;head&gt;
+                                    &lt;meta charset="utf-8" /&gt;
+                                    &lt;title&gt;My OpenLayers Map&lt;/title&gt;
+                                    &lt;link type="text/css" rel="stylesheet" href="map.css" /&gt;
+                                    &lt;script type="text/javascript" src="OpenLayers.js"&gt;&lt;/script&gt;
+                                    &lt;script type="text/javascript"&gt;
+                            var  map;
+                            function init() {
+                            //The code goes here
+                            }
+                                    &lt;/script&gt;
+                                &lt;/head&gt;
+                                &lt;body onload="init();"&gt;
+                                    &lt;div id="map"&gt;
+                                &lt;/div&gt;
+                                &lt;/body&gt;
+                            &lt;/html&gt;
+                        </code>
+                       </section>
+                    </div>
+                    <br>
+                    <div class="w3-container w3-teal w3-justify">
+                        <h3>Web Mapping</h3>
+                        <p class="w3-justify">
+                        </p>
+                    </div>
+                    <br>
+                    <div class="w3-container w3-light-green w3-justify">
+                        <h3>Remote Sensing</h3>
+                        <p class="w3-justify">
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="w3-center w3-container w3-black w3-round-large">
+            <h4>Position fix. <i>Learn Land Surveying and GIS</i></h4>
+        </footer>
+    </div>
+
+    <script>
+    openPage("block","Home")
+        function openPage(evt, pageName) {
+            var i, x, tablinks;
+            x = document.getElementsByClassName("page");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < x.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" w3-brown", "");
+            }
+            document.getElementById(pageName).style.display = "block";
+            evt.currentTarget.className += " w3-brown";
+        }
+        
+
+    </script>
+    </body>
+</html>
+
+
+
+

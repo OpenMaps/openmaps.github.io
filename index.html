@@ -3,6 +3,7 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Norican">
         <link href="w3.css" rel="stylesheet" type="text/css">
    
         <style>
@@ -16,14 +17,15 @@
         /* selected link */
         a:active {color: blue;}
         a{font-family:cursive;font-size:large;}
+        .brand { font-size: 50px;font-family: 'Norican', serif;font-weight: bold;color: black;}
         </style> 
     </head>
 <body>
 
     <div class="w3-container">
         <header class="w3-container w3-light-grey w3-round-large">
-            <div class="w3-center"><p><h1>OpenMaps</h1>
-                <img src="log.png" alt="Logo" class="w3-right w3-margin-0" style="width:130px; height:50px">
+            <div class="w3-center"><p><h1  class="brand"><span style="color:red">O</span>pen<span style="color:green">M</span>aps</h1>
+                <img src="log.png" alt="Logo" class="w3-right w3-margin-0" style="width:15%; height:10%">
                 <h3>Land, Engineering surveyors and Location Based Services Consultants</h3>
             </div>
         </header>
@@ -36,23 +38,38 @@
         </ul>
 
         <div id="Home" class="w3-container w3-border page w3-animate-left">
-            <div class="w3-row-padding w3-content" style="max-width:1400px">
+            <div class="w3-row-padding w3-content" style="max-width:100%">
                 <div class="w3-twothird">
-                    <img src="./img/compass.jpg" alt="home" style="width:100%;height:400px">
-                    <h3>OpenMaps Limited</h3>
+                    <img src="./img/compass.jpg" alt="home" style="width:100%">
+                    <h2>OpenMaps Limited</h2>
                     <div class="w3-justify">
-                        <p>
-                            We have the necessary expertise which provide the best compromise between cost, speed and reliability in the delivery of our services.
-                        </p>
+                    <p>
+                        As professional practicing surveyors in areas of engineering surveys, topographical surveys, cadastral surveys and location-based services, we have the necessary expertise which provide the best compromise between cost, speed and reliability in the delivery of our services.
+                    </p>
                     </div>
                 </div>
                 <div class="w3-third">
                     <div class="w3-container w3-brown">
                         <h3>About Us</h3>
                         <p class="w3-justify">
-                        OpenMaps is a full service firm ready to provide professional land surveying and online mapping services, while taking pride in providing our clients with superior and quality work. 
+                        OpenMaps is a full service firm ready to meet your land surveying and online mapping
+                        needs throughout Kenya and East Africa region. We continue to provide professional land 
+                        surveying and online mapping services taking pride in providing our clients with superior and quality work. 
                         
                         Our Management of projects from beginning to end is unique and extremely efficient at a reasonable price.
+                        </p>
+                    </div>
+                    <br>
+                    <div class="w3-container w3-teal w3-justify">
+                        <h3>Vision & Mission</h3>
+                        <p class="w3-justify">
+                            To maintain high accuracy and quality products within the shortest time possible.
+                        </p>
+                        <h3>Links</h3>
+                        <p class="w3-justify">
+                            <ul class="w3-ul w3-hoverable">
+                                <li><a href="http://www.openmapstrack.com" target="_blank">OpenMaps Tracking</a></li>
+                            </ul>
                         </p>
                     </div>
                     <br>
@@ -65,29 +82,16 @@
                             </ul>
                         </p>
                     </div>
-                    <br>
-                    <div class="w3-container w3-teal w3-justify">
-                        <h3>Vision & Mission</h3>
-                        <p class="w3-justify">
-                            To maintain high accuracy and quality products.
-                        </p>
-                        <h3>Links</h3>
-                        <p class="w3-justify">
-                            <ul class="w3-ul w3-hoverable">
-                                <li><a href="http://www.openmapstrack.com" target="_blank">OpenMaps Tracking</a></li>
-                            </ul>
-                        </p>
-                    </div>
                 </div>
             </div>
         </div>
 
         <div id="Surveys" class="w3-container w3-border page w3-animate-left">
-           <div class="w3-row-padding w3-content" style="max-width:1400px">
+           <div class="w3-row-padding w3-content" style="max-width:100%">
                 <div class="w3-twothird">
                     <img src="./img/gps.jpg" alt="surveys" style="width:100%">
                     <br>
-                    <img src="./img/plan.jpg" alt="surveys" style="width:100%;height:600px">
+                    <img src="./img/plan.jpg" alt="surveys" style="width:100%;height:60%">
                     <h2>Land Surveying</h2>
                     <div class="w3-justify">
                         <p></p>
@@ -134,10 +138,10 @@
         </div>
 
         <div id="LBS" class="w3-container w3-border page w3-animate-left">
-            <div class="w3-row-padding w3-content" style="max-width:1400px">
+            <div class="w3-row-padding w3-content" style="max-width:100%">
                 <div class="w3-twothird">
                    <div class="w3-justify">
-                        <img src="./img/na.gif" alt="GIS" style="width:100%; height:400px">
+                        <img src="./img/na.gif" alt="GIS" style="width:100%; height:40%">
                     </div>
                     <p>GIS Modelling</p>
                     <div class="w3-justify">
@@ -151,7 +155,7 @@
                         <p class="w3-justify">
                             <ul class="w3-ul w3-hoverable">
                                 <li>GIS-enabled Technologies Integration.</li>
-                                <li>Spatial database Management.</li>
+                                <li>Spatially-enabled database Management.</li>
                                 <li>Sensor-enabled GIS systems e.g temperature, noise, smoke e.t.c.</li>
                                 <li>Online maps integration with ground based Sensor e.g. RFIDs, radiation e.t.c.</li>
                             </ul>
@@ -165,6 +169,7 @@
                             <ul class="w3-ul w3-hoverable">
                                 <li>Geolocation technologies.</li>
                                 <li>Vehicle Tracking Systems and Services.</li>
+                                <li>Spatially-enabled enterprise Database Management.</li>
                                 <li>Geocoding</li>
                             </ul>
                         </p>
@@ -187,7 +192,7 @@
         </div>
         
          <div id="omblog" class="w3-container w3-border page w3-animate-top">
-            <div class="w3-row-padding w3-content" style="max-width:1400px">
+            <div class="w3-row-padding w3-content" style="max-width:100%">
                <div class="w3-twothird">
 
                         <div class="w3-container w3-grey" style="position:relative;">
@@ -265,7 +270,7 @@
         </div>
         
         <footer class="w3-center w3-container w3-black w3-round-large">
-            <h4>Position fix. <i>Learn Land Surveying and GIS</i></h4>
+            <h4>Position fix. <i>Land Surveying and GIS</i></h4>
         </footer>
     </div>
 

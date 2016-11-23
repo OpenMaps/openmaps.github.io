@@ -33,7 +33,7 @@
             <div class="w3-row-padding w3-content" style="max-width:100%">
                 <div class="w3-twothird">
                      <img src="./img/img1.jpg" alt="home" style="width:100%;height:400px">
-                        <!--start of slides--
+                        <!--start of slides
                         <div class="slideshow-container">
 
                             <div class="myfigure fade">
@@ -319,26 +319,6 @@
             document.getElementById(pageName).style.display = "block";
             evt.currentTarget.className += " w3-brown";
         }
-        
-	var slideIndex = 0;
-	showSlides();
-
-	function showSlides() {
-		var i;
-		var slides = document.getElementsByClassName("myfigure");
-		var dots = document.getElementsByClassName("dot");
-		for (i = 0; i < slides.length; i++) {
-		slides[i].style.display = "none";
-		}
-		slideIndex++;
-		if (slideIndex> slides.length) {slideIndex = 1}
-		for (i = 0; i < dots.length; i++) {
-			dots[i].className = dots[i].className.replace(" active", "");
-		}
-		slides[slideIndex-1].style.display = "block";
-		dots[slideIndex-1].className += " active";
-		setTimeout(showSlides, 2000);
-	}
 </script>
     </body>
 </html>

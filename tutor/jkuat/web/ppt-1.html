@@ -1,0 +1,955 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Lab#1</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Courtesy of ...">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../../css/reveal.css">
+		<link rel="stylesheet" href="../../css/theme/white.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="../../lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../../css/print/pdf.css' : '../../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+		
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Introduction to Web Mapping/GIS</h1>
+					<h3>Lab#1</h3>
+					<p>
+						<small>By <a href="http://www.openmaps.co.ke/">Mwaura Joshua</a> / <a href="https://twitter.com/@openmapsCo">@openmapsCo </a>on Twitter</small>
+					</p>
+				</section>
+				
+				<section>
+					<h3>Lab Objectives</h3>
+					<ul>
+						<li>Introduction to Webmapping</li>
+						<li>Mapping Libraries</li>
+						<li>Spatial DataFormats</li>
+					</ul>
+					<p>Repository <a>https://github.com/OpenMaps/tutor/tree/master/jkuat/zips</a></p>
+				</section>
+
+				<section>
+					<h3>Required knowledge</h3>
+					<a>Web mapping requires the following...</a>
+					<ul>
+						<li>mobile first!</li>
+						<li>know HTML5 and CSS3 syntax</li>
+						<li>have basic JavaScript programming skills</li>
+						<li>understand what are Web Map Service (WMS), Web Map Tile Service (WMTS) and Tile Map Service (TMS)</li>
+						<li>be able to process GIS data and perform format transformations (by using e.g. QGIS or ArcGIS)</li>
+					</ul>
+					<p>No worries - basics are easy to learn!
+					</p>
+				</section>
+				
+				<section>
+					<h3>Your Cover..</h3>
+					   <ul>
+						   <li><a>law of large numbers,</a></li>
+						   also known as the law of averages
+							<li><a>APIs are your friend</a></li>
+						</ul>
+					
+					
+				</section>
+
+				<section>
+					<h3>Services &amp; JavaScript frameworks/Libraries</h3>
+					<p>GoogleMap - Google Inc.<a href="#" target="_blank">#</a>.</p>
+					<p>Openlayers - <a href="" target="_blank">#</a>.</p>
+					<p>Leaflet – CloudMade <a href="#" target="_blank">#</a>.</p>
+					<p>Bing Maps, Here Maps, ArcGIS Online, MapBox.</p>
+				</section>
+				
+				<section>
+					<h4>Library Comparison</h4>
+					<table>
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Open Sc?</th>
+								<th>Free ?</th>
+								<th>Limitations</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Google Maps</td>
+								<td>No</td>
+								<td>Daily</td>
+								<td>Licence</td>
+							</tr>
+							<tr>
+								<td>Bing Maps</td>
+								<td>No</td>
+								<td>Monthly</td>
+								<td>Licence</td>
+							</tr>
+							<tr>
+								<td>Here Maps</td>
+								<td>No</td>
+								<td>Monthly</td>
+								<td>Licence</td>
+							</tr>
+							<tr>
+								<td>ArcGIS Online</td>
+								<td>No</td>
+								<td>No</td>
+								<td>Licence</td>
+							</tr>
+							<tr>
+								<td>MapBox</td>
+								<td>(Yes)</td>
+								<td>Monthly</td>
+								<td>Licence</td>
+							</tr>
+							<tr>
+								<td>Openlayers</td>
+								<td>Yes</td>
+								<td>Yes</td>
+								<td>skills &amp; time</td>
+							</tr>
+							<tr>
+								<td>Leaflet</td>
+								<td>Yes</td>
+								<td>Yes</td>
+								<td>skills &amp; time</td>
+							</tr> 
+						</tbody>
+					</table>
+				</section>
+
+				<!-- 1.nested vertical slides -->
+				<section>
+					<section>
+						<h3>Commercial Services</h3>
+						<p>Registration needed.</p>
+						<p><em>You get an API key</em>.</p>
+						<ul>
+                                                    <li><a>Identifies your application</a></li>
+                                                    <li><a>Used to monitor the usage of your service</a></li>
+                                                    <li><a>Reference the key in your JavaScript files</a></li></ul>
+						<br>
+						<a href="#" class="navigate-down">
+							<img width="88" height="118" data-src="https://openmaps.github.io/tutor/svg/arrow.png" alt="Down arrow">
+						</a>
+					</section>
+					<section>
+						<h3>1. Google Maps</h3>
+						<p>Base maps <em>(4 options available)</em></p>
+						<p>Add your own data.</p>
+						<ol>
+                                                    <li><a>Fusion tables</a></li>
+                                                    <li><a>GeoJSON</a></li>
+                                                    <li><a>KML</a></li>
+                                                </ol>
+					</section>
+					<section>
+						<h3>2. ArcGIS Online</h3>
+						<p>Choose base maps.</p>
+						<p>Add your own data &amp; styles.</p>
+						<p>Publish/share your map as an application.</p>
+						<ol>
+                                                    <li><a>Application templates available</a></li>
+                                                    <li><a>Available at GitHub</a></li>
+                                                </ol>
+						<p>Edit the application with JavaScript API</p>
+					</section>
+					<section>
+						<h3>3. MapBox</h3>
+						<p>Design maps with the MapBox Studio.</p>
+						<p>Reference your design by id in your JavaScript file.</p>
+						<p>Vector tiles.</p>
+						<ul>
+                                                    <li><a>Map is rendered in client side.</a></li>
+                                                </ul>
+						<p>Based on OpenSource parts.</p>
+					</section>
+					<section>
+						<h2>4. Openlayers</h2>
+						<p>Completely rewritten OL3.</p>
+						<p>More features by default.</p>
+						<ul>
+                                                    <li><a>More options to customize without plugins.</a></li>
+                                                </ul>
+					</section>
+					<section>
+						<h3>5. Leaflet</h3>
+						<p>Simple &amp; lightweight.<small>(it is only 28kb of code)</small></p>
+						<p>Mobile friendly.</p>
+						<p>Simple API.</p>
+						<p>Not many features included.</p>
+						<ul>
+                                                    <li><a>A lot of plugins.</a></li>
+                                                </ul>
+						<p>Easier to learn if you don’t know JavaScript well.</p>
+					</section>
+					<section>
+						<h2>Which library to choose?</h2>
+						<p>Considerations.</p>
+						<ul>
+                                                    <li><a>Your use case.</a></li>
+                                                    <li><a>Features.</a></li>
+                                                    <li><a>Licence.</a></li>
+                                                    <li><a>Pricing.</a></li>
+                                                    <li><a>Future.</a></li>
+                                                </ul>
+						<br>
+						<a href="#/2">
+							<img width="88" height="118" data-src="https://openmaps.github.io/tutor/svg/arrow.png" alt="Up arrow" style="transform: rotate(180deg); -webkit-transform: rotate(180deg);">
+						</a>
+					</section>
+				</section>
+				
+				<section>
+					<h3>Base maps</h3>
+					<p>Free WMS/TMS/WMTS servers</p>
+					<ul>
+                                            <li><a>http://wiki.openstreetmap.org/wiki/Tile_servers .</a></li>
+                                            <li><a>https://leaflet-extras.github.io/leaflet-providers/preview/ .</a></li>
+                                            <li><a>http://www.avenza.com/webfeatureserviceslist.</a></li>
+                                            <li><a>http://www.skylab-mobilesystems.com/en/wms_serverlist.html.</a></li>
+                                        </ul>
+				</section>
+
+				<section>
+					<h3>User interface &amp; layout: example</h3>
+					<p>Bootstrap framework (HTML, CSS, JS).</p>
+					<ul>
+                                            <li><a>Responsive.</a></li>
+                                            <li><a>A lot of ready building blocks.</a></li>
+                                            <li><a>http://getbootstrap.com/ .</a></li>
+                                        </ul>
+					<p>Templates</p>
+					<ul>
+                                            <li><a>http://startbootstrap.com/ .</a></li></ul>
+                                        <p>Leaflet Plugin</p>
+                                        <ul>
+                                            <li><a>http://bmcbride.github.io/bootleaf/.</a></li></ul>
+				</section>
+				
+				<section>
+					<h3>Interactive map features</h3>
+					<p>You should have some kind of interactivity in your map.</p>
+					<ul>
+                                            <li><a>Filtering, style changes, search....</a></li></ul>
+					<p>jQuery https://jquery.com/ </p>
+					<ul>
+                                            <li><a>easy-to-use API for event handling etc.</a></li></ul>
+                                        <p>Filtering with a slider: jQuery + noUiSlider.</p>
+                                        <ul>
+                                            <li><a>http://refreshless.com/nouislider/.</a></li></ul>
+				</section>
+
+				<section>
+					<section id="fragments">
+						<h3>Handling coordinates</h3>
+						<p>It’s best to transform your data points to the same CRS as your base map in QGIS /ArcGIS</p>
+						<p class="fragment"> If you need CRS transformations in your JavaScript code, use proj4js</p>
+						<ul class="fragment"> <li><a>http://proj4js.org/ </a></li></ul>
+						<!--
+						<p><span class="fragment">... a</span> <span class="fragment">fragmented</span> <span class="fragment">slide.</span></p>
+
+						<aside class="notes">
+							This slide has fragments which are also stepped through in the notes window.
+						</aside>-->
+					</section>
+					
+					<section>
+						<h3>Debugging</h3>
+						<!--
+						<p></p>
+						<p class="fragment grow">grow</p>
+						<p class="fragment shrink">shrink</p>
+						<p class="fragment fade-out">fade-out</p>
+						<p class="fragment fade-up">fade-up (also down, left and right!)</p>-->
+						
+						<p class="fragment fade-up">Use browser tools</p>
+						<p class="fragment fade-up">Firebug for Firefox</p>
+						<p class="fragment highlight-blue">Chrome console</p>
+						<p class="fragment fade-up"> JavaScript code <strong><span class="fragment highlight-red">”console.log(variable)”</span></strong> is shown in the console</p>
+						
+						<!--
+						<p>Highlight <span class="fragment highlight-red">red</span> 
+						<span class="fragment highlight-blue">blue</span> 
+						<span class="fragment highlight-green">green</span></p>-->
+					</section>
+				</section>
+<!--
+				<section id="transitions">
+					<h2>Transition Styles</h2>
+					<p>
+						You can select from different transitions, like: <br>
+						<a href="?transition=none#/transitions">None</a> -
+						<a href="?transition=fade#/transitions">Fade</a> -
+						<a href="?transition=slide#/transitions">Slide</a> -
+						<a href="?transition=convex#/transitions">Convex</a> -
+						<a href="?transition=concave#/transitions">Concave</a> -
+						<a href="?transition=zoom#/transitions">Zoom</a>
+					</p>
+				</section>
+-->
+<!--
+				<section id="themes">
+					<h2>Themes</h2>
+					<p>
+						reveal.js comes with a few themes built in: <br>
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/black.css'); return false;">Black (default)</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/white.css'); return false;">White</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/league.css'); return false;">League</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/sky.css'); return false;">Sky</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/beige.css'); return false;">Beige</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/simple.css'); return false;">Simple</a> <br>
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/serif.css'); return false;">Serif</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/blood.css'); return false;">Blood</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/night.css'); return false;">Night</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/moon.css'); return false;">Moon</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/solarized.css'); return false;">Solarized</a>
+					</p>
+				</section>
+-->
+<!--
+				<section>
+					<section data-background="#dddddd">
+						<h2>Slide Backgrounds</h2>
+						<p>
+							Set <code>data-background="#dddddd"</code> on a slide to change the background color. All CSS color formats are supported.
+						</p>
+						<a href="#" class="navigate-down">
+							<img width="178" height="238" data-src="http://localhost/svg/arrow.png" alt="Down arrow">
+						</a>
+					</section>
+					
+					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png">
+						<h2>Image Backgrounds</h2>
+						<pre><code class="hljs">&lt;section data-background="image.png"&gt;</code></pre>
+					</section>
+					
+					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png" data-background-repeat="repeat" data-background-size="100px">
+						<h2>Tiled Backgrounds</h2>
+						<pre><code class="hljs" style="word-wrap: break-word;">&lt;section data-background="image.png" data-background-repeat="repeat" data-background-size="100px"&gt;</code></pre>
+					</section>
+					
+					<section data-background-video="https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.mp4,https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.webm" data-background-color="#000000">
+						<div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
+							<h2>Video Backgrounds</h2>
+							<pre><code class="hljs" style="word-wrap: break-word;">&lt;section data-background-video="video.mp4,video.webm"&gt;</code></pre>
+						</div>
+					</section>
+					
+					<section data-background="http://i.giphy.com/90F8aUepslB84.gif">
+						<h2>... and GIFs!</h2>
+					</section>
+				</section>
+-->
+<!--
+				<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
+					<h2>Background Transitions</h2>
+					<p>
+						Different background transitions are available via the backgroundTransition option. This one's called "zoom".
+					</p>
+					<pre><code class="hljs">Reveal.configure({ backgroundTransition: 'zoom' })</code></pre>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
+					<h2>Background Transitions</h2>
+					<p>
+						You can override background transitions per-slide.
+					</p>
+					<pre><code class="hljs" style="word-wrap: break-word;">&lt;section data-background-transition="zoom"&gt;</code></pre>
+				</section>
+-->
+<!--
+				<section data-markdown>
+					<script type="text/template">
+						## Markdown support
+
+						Write content using inline or external Markdown.
+						Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
+
+						```
+						<section data-markdown>
+						  ## Markdown support
+
+						  Write content using inline or external Markdown.
+						  Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
+						</section>
+						```
+					</script>
+				</section>
+
+				<section>
+					<h2>Pretty Code</h2>
+					<pre><code class="hljs" data-trim contenteditable>
+function linkify( selector ) {
+  if( supports3DTransforms ) {
+
+    var nodes = document.querySelectorAll( selector );
+
+    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
+      var node = nodes[i];
+
+      if( !node.className ) {
+        node.className += ' roll';
+      }
+    }
+  }
+}
+					</code></pre>
+					<p>Code syntax highlighting courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
+				</section>
+-->
+				<section>
+					<h4>Formats for spatial data</h4>
+					<ol>
+						<li>File-based data</li>
+                                                    <ul>
+                                                    <li><a>Shapefile, KML, GeoJSON, &amp; TopoJSON, gpx, csv</a></li></ul>
+						<li>Spatially-enabled database data</li>
+                                                    <ul>
+                                                    <li><a>Proprietary: Microsoft SQL Server, Oracle Spatial, &amp; the Esri ArcSDE middleware.</a></li></ul>
+                                                    <ul>
+                                                    <li><a>Open equivalents: PostgreSQL with PostGIS extension,  SQLite with SpatiaLite extension.</a></li></ul>
+						<li>Raster formats</li>
+                                                    <ul>
+                                                    <li><a>Open raster formats  JPEG, PNG, TIFF, BMP, GIF.</a></li></ul>
+					</ol>
+				</section>
+
+				<!-- 2. nested vertical slides -->
+				<section>
+					<section>
+						<h3>Spatial File Structures</h3>
+						
+						<a href="#" class="navigate-down">
+							<img width="88" height="118" data-src="https://openmaps.github.io/tutor/svg/arrow.png" alt="Down arrow">
+						</a>
+					</section>
+					<section>
+						<h4>1. Shapefile</h4>
+						<p>Included files</p>
+						<ol>
+                                                    <li><a>.shp</a></li>
+                                                    <li><a>.shx</a></li>
+                                                    <li><a>.dbf</a></li>
+                                                </ol>
+                                                <p><small><a>http://resources.arcgis.com/en/help/main/10.2/index.html#//005600000003000000</a></small></p>
+					</section>
+					
+					<section>
+						<h4>2. KML</h4>
+						<p>XML, wherein data is maintained in a series of structured tags.</p>
+						<pre><code class="hljs" data-trim contenteditable>
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document>
+        <Style id="style_198">
+            <IconStyle>
+                <scale>1.0</scale><Icon>
+                <href>http://www.mapfinity.com/static/icons/pin_yellow.png</href></Icon>
+                <hotSpot x="0.5" y="0.0" xUnits="fraction" yUnits="pixels" />
+            </IconStyle>
+        </Style>
+        <Folder>
+            <name>Waypoints</name>
+            <Placemark>
+                <styleUrl>#style_198</styleUrl>
+                <TimeStamp>
+                    <when>2017-03-24T07:55:39.993Z</when></TimeStamp>
+                <Point>
+                    <coordinates>36.958553,-0.159651</coordinates></Point>
+            </Placemark>
+        </Folder>
+        <name>Waypoints</name>
+        <description><![CDATA[Data exported Fri Mar 24 10:55:55 EAT 2017]]></description>
+    </Document>
+</kml>
+					</code></pre>
+					</section>
+
+					<section>
+						<h4>2. GeoJSON</h4>
+						<p>Data is arranged in a hierarchical series of key-value pairs <strong> with Discrete geometries</strong>.</p>
+						<pre><code class="hljs" data-trim contenteditable>
+{ "type": "FeatureCollection",
+    "features": [
+      { "type": "Feature",
+        "geometry": {"type": "Point", "coordinates": [102.0, 0.5]},
+        "properties": {"F_NAME": "CIANDA DISPENSARY"}
+        },
+      { "type": "Feature",
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [102.0, 0.0], [103.0, 1.0], [104.0, 0.0], [105.0, 1.0]
+            ]
+          },
+        "properties": {
+          "FID": 1, 
+          "F_NAME": "MOI AVENUE"
+          }
+        },
+      { "type": "Feature",
+         "geometry": {
+           "type": "Polygon",
+           "coordinates": [
+             [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0],
+               [100.0, 1.0], [100.0, 0.0] ]
+             ]
+         },
+         "properties": {
+           "FID": 1, 
+           "F_NAME": "GATHANGA AREA"
+           }
+         }
+       ]
+     }
+					</code></pre>
+					<p><a>http://geojson.org/geojson-spec.html</a></p>
+					</section>
+
+					<section>
+						<h4>3. TopoJSON</h4>
+						<p><small>Encodes topology <strong> with Geometries that share sequences of positions called arcs</strong>.</small></p>
+						<pre><code class="hljs" data-trim contenteditable>
+{
+  "type": "Topology",
+  "objects": {
+    "example": {
+      "type": "GeometryCollection",
+      "geometries": [
+        {
+          "type": "Point",
+          "properties": {"F_NAME": "CIANDA DISPENSARY"},
+          "coordinates": [102, 0.5]
+        },
+        {
+          "type": "LineString",
+          "properties": {
+          "FID": 1, 
+          "F_NAME": "MOI AVENUE"
+          },
+          "arcs": [0]
+        },
+        {
+          "type": "Polygon",
+          "properties": {
+           "FID": 1, 
+           "F_NAME": "GATHANGA AREA"
+           }
+          },
+          "arcs": [[-2]]
+        }
+      ]
+    }
+  },
+  "arcs": [
+    [[102, 0], [103, 1], [104, 0], [105, 1]],
+    [[100, 0], [101, 0], [101, 1], [100, 1], [100, 0]]
+  ]
+}
+					</code></pre>
+					<p><a><small>https://github.com/topojson/topojson-specification/blob/master/README.md</small></a></p>
+						<a href="#/2">
+							<img width="48" height="68" data-src="https://openmaps.github.io/tutor/svg/arrow.png" alt="Up arrow" style="transform: rotate(180deg); -webkit-transform: rotate(180deg);">
+						</a>
+					</section>
+				</section>
+<!--
+				<section>
+					<h2>Clever Quotes</h2>
+					<p>
+						These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
+						&ldquo;The nice thing about standards is that there are so many to choose from&rdquo;</q> and block:
+					</p>
+					<blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
+						&ldquo;For years there has been a theory that millions of monkeys typing at random on millions of typewriters would
+						reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.&rdquo;
+					</blockquote>
+				</section>
+-->
+<!--
+				<section>
+					<h2>Intergalactic Interconnections</h2>
+					<p>
+						You can link between slides internally,
+						<a href="#/2/3">like this</a>.
+					</p>
+				</section>
+
+				<section>
+					<h2>Speaker View</h2>
+					<p>There's a <a href="https://github.com/hakimel/reveal.js#speaker-notes">speaker view</a>. It includes a timer, preview of the upcoming slide as well as your speaker notes.</p>
+					<p>Press the <em>S</em> key to try it out.</p>
+
+					<aside class="notes">
+						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
+					</aside>
+				</section>
+
+				<section>
+					<h2>Export to PDF</h2>
+					<p>Presentations can be <a href="https://github.com/hakimel/reveal.js#pdf-export">exported to PDF</a>, here's an example:</p>
+					<iframe data-src="https://www.slideshare.net/slideshow/embed_code/42840540" width="445" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+				</section>
+
+				<section>
+					<h2>Global State</h2>
+					<p>
+						Set <code>data-state="something"</code> on a slide and <code>"something"</code>
+						will be added as a class to the document element when the slide is open. This lets you
+						apply broader style changes, like switching the page background.
+					</p>
+				</section>
+-->
+<!--
+				<section data-state="customevent">
+					<h2>State Events</h2>
+					<p>
+						Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
+					</p>
+					<pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
+Reveal.addEventListener( 'customevent', function() {
+	console.log( '"customevent" has fired' );
+} );
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Take a Moment</h2>
+					<p>
+						Press B or . on your keyboard to pause the presentation. This is helpful when you're on stage and want to take distracting slides off the screen.
+					</p>
+				</section>
+
+				<section>
+					<h2>Much more</h2>
+					<ul>
+						<li>Right-to-left support</li>
+						<li><a href="">Extensive JavaScript API</a></li>
+						<li><a href="">Auto-progression</a></li>
+						<li><a href="">Parallax backgrounds</a></li>
+						<li><a href="">Custom keyboard bindings</a></li>
+					</ul>
+				</section>
+-->
+				<section data-background="#dddddd">
+                                        <h4>Components of Webmap</h4>
+                                        <a href="#" class="navigate-down">
+                                                <img width="1000" height="500" data-src="https://openmaps.github.io/tutor/svg/chart1.jpg" alt="Flow Chart">
+                                        </a>
+                                </section>
+				
+				<section>
+					<h4>A simple example</h4>
+                                        <ul>
+                                            <li>Let’s try a simple web map</li>
+                                            <li>The example is created with Leaflet</li>
+                                            <li>...but the other techniques are very similar</li>
+                                        </ul>
+                                        <ol>
+                                            <li>HTML page setup.</li>
+                                            <li>Script.js file setup and data import.</li>
+                                            <li>Event handlers</li>
+					</ol>
+				</section>
+				
+				<section>
+					<h4>1. HTML Setup</h4>
+					<a>Head section:</a>
+                                        <ul>
+                                            <li>Import JavaScript files &amp; online libraries.</li>
+                                            <li>Import a CSS file.</li>
+                                        </ul><br>
+                                        <a>Body section:</a><br>
+                                        <ul>
+                                            <li>Add link to <em>script.js</em> inside a div tag</li>
+                                        </ul>
+                                        <pre><code class="hljs" data-trim contenteditable>
+<head>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-1.0.1/leaflet.css" />
+    <link rel="stylesheet" href="css/styles.css" type="text/css" />
+    <script src="http://cdn.leafletjs.com/leaflet-1.0.1/leaflet.js"></script>
+</head>
+<body>
+    <div id="map">
+    <script src="js/script.js" type="text/javascript"></script>
+    </div>
+</body>
+                                        </code></pre>
+				</section>
+				
+				<section>
+					<h4>2. Script.js setup &amp; Map initialization</h4>
+                                        <ul>
+                                            <li>Initialize the map &amp; set the center point</li>
+                                            <li>Add a base layer to the map</li>
+                                            <li>Import data &amp; add it to the map</li>
+                                            <li>Add event handlers</li>
+                                        </ul>
+                                        <pre><code class="hljs" data-trim contenteditable>
+var map = new L.Map('map', { 
+center: new L.LatLng(-2.652, 36.8325),
+zoom: 13,
+minZoom: 12,
+maxZoom: 16
+});
+                                        </code></pre>
+				</section>
+				
+				<section>
+					<h4>2. Script.js setup: Background layer</h4>
+					<p>remove the 'center' &amp; 'zoom' options from the L.map constructor</p>
+					<p>center &amp; zoom level with the setView() method</p>
+                                        <pre><code class="hljs" data-trim contenteditable>
+var osm = L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
+maxZoom: 18,
+attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'});
+
+map.addLayer(osm);
+
+//or
+
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+                                        </code></pre>
+				</section>
+				
+				<section>
+					<h4>2. Script.js setup: Background layer</h4>
+                                        <p>little more user friendly</p>
+                                        <pre><code class="hljs" data-trim contenteditable>
+var map = L.map('map',{scrollWheelZoom:false}).setView([-2.652, 36.8325], 13);
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+                                        </code></pre>
+				</section>
+				
+				<section>
+					<h4>2. Script.js: Add a WMS Layer to the Map</h4>
+					<p>using L.tileLayer.wms() displays a WMS service as a tile layer on the map</p>
+                	<pre><code class="hljs" data-trim contenteditable>
+				
+var tileUrl = 'https://{s}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png?apikey=[insert-your-apikey-here]';
+layer = new L.TileLayer(tileUrl, {maxZoom: 18});
+
+                	</code></pre>
+				</section>
+				
+				<section>
+					<h4>3. Script.js: Add a Default Marker to the Map</h4>
+                                        <p>creates a marker variable &amp; assigns it a marker object using L.marker()</p>
+                                        <pre><code class="hljs" data-trim contenteditable>
+var marker = L.marker([-2.652, 36.8325]).addTo(map);
+                                        </code></pre>
+				</section>
+				
+				<section>
+					<h4>3. Script.js: Add a Custom Marker to the Map</h4>
+                                        <p>creates the ‘MyIcon’ variable &amp; assigns it an icon marker using L.icon()</p>
+                                        <p>A few options are passed to L.icon():</p>
+                                        <ul>
+                                            <li><a>iconUrl:</a> the url to an image to be used as icon marker</li>
+                                            <li><a>iconSize:</a> thesize to make the icon marker</li></ul>
+                                        <pre><code class="hljs" data-trim contenteditable>
+var MyIcon = L.icon({
+iconUrl: 'http://localhost/svg/flame.svg',
+iconSize: [38, 95], // size of the icon
+popupAnchor: [0,-15]
+});
+var marker = L.marker([-2.652, 36.8325], {icon: MyIcon}).addTo(map);
+                                        </code></pre>
+				</section>
+<!--
+				<section>
+					<h4>2. Script.js setup: Import point data</h4>
+                                        <p>Reading GeoJSON data into a variable (save to a separate .js file if lot of features):</p>
+                                        <pre><code class="hljs" data-trim contenteditable>
+var hospitals = {
+"type": "FeatureCollection",
+"features": [{ "type": "Feature",
+"properties": { "name": "Chianina" },
+"geometry": { "type": "Point", "coordinates": [ -2.548, 36.7921 ] }
+},
+                                        </code></pre>
+				</section>
+-->
+<!--
+				<section>
+					<h4>2. Script.js setup: Import point data</h4>
+                                        <ul>
+                                            <li>Creates points from the data</li>
+                                            
+                                        </ul>
+                                        <pre><code class="hljs" data-trim contenteditable>
+var hospitalpoints = L.geoJson(hospitals, {
+    pointToLayer: function (feature, latlng) {
+    return L.marker(latlng, hospitalsymbol);
+    }
+}).addTo(map);
+                                        </code></pre>
+				</section>
+-->
+<!--
+				<section>
+					<h4>3. Event handlers</h4>
+                                        <ul>
+                                            <li>Set a trigger and action</li>
+                                            <li>Triggers: click, mouseover, map load, popup open...</li>
+                                            <li>Actions: an existing method or your own function</li>
+                                            <li>Example: Show coordinates when user clicks on the map</li>
+                                        </ul>
+                                        <pre><code class="hljs" data-trim contenteditable>
+function showCoords(e) {
+    popup
+        .setLatLng(e.latlng)
+        .setContent(e.latlng.toString())
+        .openOn(map);
+}
+map.on('click', showCoords);
+                                        </code></pre>
+				</section>
+-->
+<section>
+					<h4>3. Event handlers</h4>
+                                        <ul>
+                                            <li>Set a trigger and action</li>
+                                            <li>Triggers: click, mouseover, map load, popup open...</li>
+                                            <li>Actions: an existing method or your own function</li>
+                                            <li>Example: Show name when user clicks on the icon</li>
+                                        </ul>
+                                        <pre><code class="hljs" data-trim contenteditable>
+//in js
+L.marker([-2.652, 36.8325], {icon: MyIcon}).bindPopup('Nairobi').addTo(map);
+//in css
+.custom .leaflet-popup-tip,
+.custom .leaflet-popup-content-wrapper {
+background: #e93434;
+color: #ffffff;
+}
+                                        </code></pre>
+				</section>
+				
+				<section>
+					<h4>Basic Elements of Javascript</h4>
+                                        <ul>
+                                            <li>Each  line  should  ends  with  ;  (semicolon).</li>
+                                            <li><a>//</a>  -­‐‐  comment  -­‐‐  everything  after  is  ignored.</li>
+                                            <li><a>var</a>  variable  -­‐‐  creates  a  variable  that  can  hold  a  value  (label,identifier).</li>
+                                            <li>Equal  sign  after  a  variable <a> = </a> -­‐‐  assign  a  value  on  the  right  to  a  variable.</li>
+                                            <li><a>Single  values</a>  -­‐‐  numbers  50.51,  <a>string</a>  -­‐‐  ‘text’  </li>
+                                            <li>Grouped  values:  arrays <a> [1,2,3],</a>  objects/dictionaries  <a>{x:1,y:2} </a> </li>
+                                        </ul>
+				</section>
+				
+				<section>
+					<h4>Leaflet’s API</h4>
+                                        <ul>
+                                            <li><a>L  (capital  l)</a>  variable  is  how  you  access  Leaflet’s  functionality.</li>
+                                            <li><a>L.  (capital  l  dot) </a> -­‐‐  means  that  you’re  using  Leaflet’s  API.</li>
+                                            <li>For  example:  to  “test”  a  method  with  two  values  you  would  write  
+                                                something  like: <a> L.method(value1,value2)</a>.</li>
+                                            <li>Method  is  a  function  related  to  an <a> object  (capital  L)  that  returns  a  
+                                                value.. </a> </li>
+                                            <li><small>It  often  requires  a  value  or  values  to  work .</small></li>
+                                            <li>Every <strong> task/action</strong>  in  Leaflet  has  a <italic> method</italic>.</li>
+                                        </ul>
+				</section>
+				
+				<section style="text-align: left;">
+					<h4>That’s  it! </h4>
+					
+                                        <p>Any queries during the practicals can be sent to:</p>
+                                            <p><a><italic>jmwaura@jkuat.ac.ke </italic></a></p>
+					<br>
+                                        <p>I'll try to answer as fast as possible.</p>
+                                        
+					<small><q>Courtesy of <strong>reveal.js</strong></q></small>
+				</section>
+                                
+			</div>
+
+		</div>
+
+		<script src="../../lib/js/head.min.js"></script>
+		<script src="../../js/reveal.js"></script>
+		<script>
+		function passcode() {
+             var testV = 1;
+             var passd = prompt("Enter your password","");
+             while (testV < 3) {
+                    if(!passd) {
+                           var passd = prompt("Oops!, Request password to get Access","");
+                    }
+                    else if (passd.toLowerCase() == "bitclicks") {
+                         alert('You Got it Right!');
+                         window.open('./ppt.html');
+                         break;
+                    } 
+                    testV+=1;
+
+              }
+              if (passd.toLowerCase()!="bitclicks" & testV ==3)
+              return " ";
+		} 
+		window.onload=passcode; 
+		</script>
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: '../../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../../plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

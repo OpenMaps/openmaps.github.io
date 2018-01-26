@@ -1,0 +1,25 @@
+body {
+	padding: 0;
+	margin: 0;
+	background: whitesmoke;
+}
+h1, h2 {
+	position: absolute;
+	left: 20px;
+	top: 10px;
+	font-family: "Proxima Nova", Montserrat, sans-serif;
+	font-size: 2em;
+	font-weight: 100;
+	color: #005DAA;
+}
+h2 {
+	top: 50px;
+	font-size: 1.6em;
+}
+.county {
+  stroke: #fff;
+  fill:#005DAA;
+}
+.hover {
+	fill: yellow;   
+} 

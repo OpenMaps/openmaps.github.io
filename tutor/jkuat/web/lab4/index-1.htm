@@ -1,0 +1,139 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>D3 map</title>
+    <script src="./js/d3.min.js"></script>
+    <script src="d/k-counties.js"></script>
+    
+    <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+ 
+    <style>
+		body {
+			padding: 0;
+			margin: 0;
+			background: whitesmoke;
+		}
+		svg {
+            font-family: sans-serif;
+            font-size: 10px;
+            font-size: 0.875em;
+            font-weight: normal;
+        }
+		h1 {
+			position: absolute;
+			left: 20px;
+			top: 10px;
+			font-family: "Proxima Nova", Montserrat, sans-serif;
+			font-size: 2em;
+			font-weight: 100;
+			color: #bb5DAA;
+		}
+		h2 {
+			position: absolute;
+			left: 20px;
+			top: 10px;
+			font-family: "Proxima Nova", Montserrat, sans-serif;
+			font-size: 2em;
+			font-weight: 100;
+			color: #005DAA;
+		}
+		h2 {
+			top: 50px;
+			font-size: 1.6em;
+		}
+		.county {
+		  stroke: #fff;
+		  fill:#00FF00;
+		}
+		.hover {
+			fill: #00FFFF;
+			cursor: pointer;   
+		} 
+		text.halo {
+            opacity: 0.7;
+            stroke: #fff;
+            stroke-width: 1px;
+            
+        }
+        stroke-miterlimit: 1;
+    </style>
+</head>
+<body>
+    <h1>Kenya Counties</h1>
+    <h2></h2>
+  <script>
+        
+    var width = window.innerWidth,
+        height = window.innerHeight;
+    
+    var svg = d3.select( "body" )
+          .append( "svg" )
+          .attr( "width", width )
+          .attr( "height", height );
+      
+    //create Kenya mercator projection, centered on Nairobi
+	var projection = d3.geo.mercator()
+		.center([39.03111,0.25141])
+		.scale([3500])
+		.translate([width/2, height/2]);
+        
+     //create svg path generator using the projection
+    var geoPath = d3.geo.path()
+        .projection(projection);
+  
+    //retrieve data for choropleth
+    svg.append("g")
+        .selectAll("path")
+        .data(counties.features)
+        .enter()
+        .append("path")
+        .attr( "d", geoPath )
+        .style("stroke-width", "1")
+        .style("stroke", "white")
+        .attr("class","county")
+        .on("mouseover", function(d){
+			d3.select("h1").text(d.properties.ccodes);
+            d3.select("h2").text(d.properties.Name);
+            d3.select(this).attr("class","county hover");
+        })
+        .on("mouseout", function(d){
+			d3.select("h1").text("");
+            d3.select("h2").text("");
+            d3.select(this).attr("class","county");
+        });
+       
+      var labels = svg.append('g').attr('class', 'labels');
+      //Reading csv file
+      d3.csv("d/election-2012.csv", function(d) {
+		  return {
+			id: d.id,
+			codes : d.codes,
+			counties : d.Counties,
+			votes : +d.Margin
+		  };
+		}, function(data) {
+		  console.log(data);
+		});
+	//Labelling geojson
+    labels.selectAll('.label').data(counties.features).enter().append('text')
+        .attr("class", "halo")
+        .attr('transform', function(d) {
+            return "translate(" + geoPath.centroid(d) + ")";
+        })
+        .style('text-anchor', 'middle')
+        .text(function(d) {
+            return d.properties.id
+        });
+    labels.selectAll('.label').data(counties.features).enter().append('text')
+        .attr("class", "label")
+        .attr('transform', function(d) {
+            return "translate(" + geoPath.centroid(d) + ")";
+        })
+        .style('text-anchor', 'middle')
+        .text(function(d) {
+            return d.properties.id
+        });
+		
+  </script>
+</body>
+</html>

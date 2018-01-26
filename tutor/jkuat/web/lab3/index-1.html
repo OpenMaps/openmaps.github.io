@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+		
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
+<style>
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+</style>
+
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+<script src="http://maps.stamen.com/js/tile.stamen.js?v1.2.1"></script>
+
+</head>
+
+<body id="map">
+
+<script>
+
+    // Define initial parameters:
+
+        // location over which we will initially center the map
+    var loc = {'lat': -1.28141, 'lon': 36.83111}, 
+        // extent to which we are initially zoommed
+        zoomLevel = 10, 
+        // the maximum level of detail a user is allowed to see
+        maxZoom = 15, 
+        // id of the element in which we will place the map
+        mapID = 'map'; 
+
+    // Create the map object, setting the initial view:
+    var map = L.map('map').setView(
+        [loc.lat, loc.lon],
+        zoomLevel
+    );
+
+    // Instantiate a tile layer, directing Leaflet to use the Open Street Map (OSM) API to access map tiles:
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        'maxZoom': maxZoom, 
+        'attribution': 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>'
+    }).addTo(map);
+
+    // Add a watercolor layer: http://maps.stamen.com/#terrain/12/37.7706/-122.3782
+    // Comment this line out if you do not want a watercolor layer and remove the attribution above to Stamen Design.
+    var watercolor = new L.StamenTileLayer("watercolor")
+    	.addTo(map);
+
+
+    // Load geoJSON data with jQuery:
+    $.getJSON('ke-counties.json', function(data) {
+
+    	// Use Leaflet to parse the data and display it as a layer on the map:
+	L.geoJson(data, {
+	    onEachFeature: function (feature, layer) {
+	        layer.bindPopup(feature.properties.Ccodes);
+	    }
+	}).addTo(map);
+
+    });
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Lab#3</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Courtesy of ...">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../../css/reveal.css">
+		<link rel="stylesheet" href="../../css/theme/white.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="../../lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../../css/print/pdf.css' : '../../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Leaflet Round-up: Map Elements &amp; Plugins</h1>
+					<h3>Lab#3</h3>
+					<p>
+						<small>By <a href="http://www.openmaps.co.ke/">Mwaura Joshua</a> / <a href="https://twitter.com/@openmapsCo">@openmapsCo </a>on Twitter</small>
+					</p>
+				</section>
+
+				<section>
+					<h3>Lab Objectives</h3>
+					<ul>
+						<li>Map elements</li>
+						<li>Leaflet Plugins</li>
+						<li>Deployment</li>
+					</ul>
+					<p>Repository <a>https://github.com/OpenMaps/tutor/tree/master/jkuat/zips</a></p>
+				</section>
+
+				<section>
+					<h3>Add a Scalebar</h3>
+					<p>Scalebar is a native control of Leaflet. It is very simple to add it to your
+map.</p>
+					<pre><code class="hljs" data-trim contenteditable>
+//scalebar
+L.control.scale().addTo(map);
+				</code></pre>
+				</section>
+				
+				<section>
+					<h4>Titles and subtitles</h4>
+					<p>new control to change our page in order to do some
+						<ul>
+							<li>new titles</li>
+							<li>&amp; subtitles in some div components.</li>
+						</ul></p>
+						<pre><code class="hljs" data-trim contenteditable>
+var title = new L.Control();
+	title.onAdd = function (map) {
+		this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+		this.update();
+		return this._div;
+	};
+	title.update = function () {
+	this._div.innerHTML = '<h2>This is the title</h2>This is the subtitle'
+	};
+	title.addTo(map);
+				</code></pre>
+				</section>
+				
+				<section>
+						<h4>Titles and subtitles (2)</h4>
+						<p>&amp; the CSS code:</p>
+                        <pre><code class="hljs" data-trim contenteditable>
+.info {
+padding: 6px 8px;
+font: 14px/16px Arial, Helvetica, sans-serif;
+background: white;
+background: rgba(255,255,255,0.8);box-shadow: 0 0 15px rgba(0,0,0,0.2);
+border-radius: 5px;
+}
+.info h2 {
+margin: 0 0 5px;
+color: #777;
+}
+				</code></pre>
+				<p>Modify the text of the layer by this one:</p>
+				<pre><code class="hljs" data-trim contenteditable>
+this._div.innerHTML = '<center><h2>Kenya Interactive Map</h2>2016<br><img
+src="img/logo.png"/><br></center>'
+				</code></pre> 
+                                        
+				</section>
+				
+				<section>
+					<h4>Define a new baselayer </h4>
+					<p>Add a new baselayer instead of OSM Layer.</p>
+					<p>Stamen Design delivers some nice base layers by using a specific tile format.</p>
+				<ul>
+					<li>http://tile.stamen.com/toner/{z}/{x}/{y}.png</li>
+					<li>Tiles are 256 × 256 pixel PNG files</li>
+					<li>Each zoom level is a directory, each column is a subdirectory, and
+each tile in that column is a file</li>
+					<li>Filename(url) format is /zoom/x/y.png</li>
+				</ul>
+				
+				</section>
+				
+				<section>
+                   <h4>Define a new baselayer (2)</h4>
+					<li>First, comment the TileLayer OpenStreetMap by using <a>/*</a> your code <a>*/</a>.</li>
+					<pre><code class="hljs" data-trim contenteditable>
+/*L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+attribution:'&copy;<ahref="http://osm.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);*/
+
+//Add these lines instead:
+L.tileLayer('http://tile.stamen.com/toner/{z}/{x}/{y}.png', {
+attribution: '&copy; <a href="http://maps.stamen.com/">Stamen Design</a>'
+}).addTo(map);
+					</code></pre>
+                </section>
+                                
+				<section>
+					<h4>Layers Groups and layers controls</h4>
+					<li>control to create a TOC (Table of
+Contents) in order to control to display or hide the layers</li>
+					<pre><code class="hljs" data-trim contenteditable>
+var osm = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+attribution:'&copy;<ahref="http://osm.org/copyright">OpenStreetMap</a> contributors'
+});
+
+var stamen = L.tileLayer('http://tile.stamen.com/toner/{z}/{x}/{y}.png', {
+attribution: '&copy; <a href="http://maps.stamen.com">Stamen Design</a>'
+});
+
+var esri = new L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/
+World_Imagery/MapServer/tile/{z}/{y}/{x}',
+{attribution:'&copy;<ahref="http://www.esri.com/">
+Esri</a>, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-
+EGP,and the GIS User Community'});
+					</code></pre>
+			</section>
+			
+			<section>
+					<h4>Layers Groups and layers controls (2)</h4>
+					<li>We are give some options to the var map declaration:</li>
+					<pre><code class="hljs" data-trim contenteditable>
+var map = new L.Map('map',{scrollWheelZoom:false,minZoom:12,maxZoom: 14, layers:
+[stamen, esri] }).setView([-1.28141,36.83111], 13);
+					</code></pre>
+					<p></p>
+					<pre><code class="hljs" data-trim contenteditable>
+var baseLayers = {
+"Stamen": stamen,
+"OpenStreetMap": osm
+};
+var overlays = {
+"Esri Imagery" : esri
+};
+
+L.control.layers(baseLayers, overlays).addTo(map);
+					</code></pre>
+					<p><small>And finally, add the new TOC control to the map: right-top of your webmap</small></p>
+				</section>
+                                
+				<!-- 1. nested vertical slides -->
+				<section>
+					<section>
+						<h3>Leaflet Plugins</h3>
+						
+						<a href="#" class="navigate-down">
+							<img width="88" height="118" data-src="https://openmaps.github.io/tutor/svg/arrow.png" alt="Down arrow">
+						</a>
+					</section>
+					
+					<section>
+						<h4>a). Fullscreen</h4>
+						<p>Download the plugin here: <a>http://brunob.github.io/leaflet.fullscreen/</a></p>
+					</section>
+
+					<section>
+						<h4>b). Minimap</h4>
+						<p>Minimap plugin allows you to display a dynamic situation map in a corner
+of your map.</p>
+						<p>A situation map is intended to give an overview of current
+extent</p>
+						<p>Download the plugin:<a>https://github.com/Norkart/Leaflet-MiniMap</a></p>
+					</section>
+					
+					<section>
+						<h4>c). Geocoding</h4>
+						<p>transformation process of addresses and
+places to coordinates <a>forward geocoding</a></p>
+					<p><a>https://github.com/k4r573n/leaflet-control-osm-geocoder</a></p>
+					</section>
+					
+					<section>
+						<h4>d). Draw</h4>
+						<p>to draw some geometric elements (points, lines,
+polygons) in your map <a>https://github.com/Leaflet/Leaflet.draw</a></p>
+					</section>
+					
+					<section>
+						<h4>e). Base Layers</h4>
+						<p>base layers. You can use these
+plugins to do that and try to add mapbox, bing, google maps base layers</p>
+					<ul>
+						<li><a>https://github.com/shramov/leaflet-plugins</a></li>
+						<li><a>https://github.com/leaflet-extras/leaflet-providers</a></li>
+					</ul>
+					</section>
+					
+					<section>
+						<h4>f). Marker Cluster</h4>
+						<p>Visit: <a>https://github.com/Leaflet/Leaflet.markercluster</a></p>
+					</section>
+					
+					<section>
+						<h4>g). Add your own data</h4>
+						<p>Visit: <a>http://makinacorpus.github.io/Leaflet.FileLayer/</a></p>
+					</section>
+					
+					<section>
+						<h4>h). Location list</h4>
+						<p>This plugin allows you to zoom to a specific area</p>
+						<p>It displays a control which scrolls the map through the list of locations and zooms.</p>
+						<p>Visit: <a>https://github.com/mithron/leaflet.locationlist</a></p>
+					</section>
+					
+					<section>
+						<h4>i). Graticule</h4>
+						<p>Visit: <a>https://github.com/turban/Leaflet.Graticule</a></p>
+					</section>
+					
+					<section>
+						<h4>j). CartoDB Layer</h4>
+						<p>CartoDB is a cloud-based solution for mapping</p>
+						<p>you have to create an account <a>http://cartodb.com/</a></p>
+					</section>
+
+					<section>
+						<h4>k). D3.js Integration</h4>
+						<p>There will be a sample of this...</p>
+						
+						<h4>l). WFS-T</h4>
+						<p>Visit <a>https://github.com/Leaflet/Leaflet.Editable</a></p>
+						<a href="#/2">
+							<img width="48" height="68" data-src="https://openmaps.github.io/tutor/svg/arrow.png" alt="Up arrow" style="transform: rotate(180deg); -webkit-transform: rotate(180deg);">
+						</a>
+					</section>
+				</section>
+				
+				<section>
+					<h3>Deployment</h3>
+					<h4>On your local Web Server</h4>
+					<p>Install a web server like Apache HTTP Server, nginx, XAMPP or another one.</p>
+					<p>Copy your files in the htdocs directory in order to access to your application with http protocol.</p>
+					<p><a>http://localhost/webmap</a></p>
+				</section>		
+							
+				<section>
+					<h3>Deployment</h3>
+					<h4>On the web</h4>
+					<p>There are many free providers to host online your application.</p>
+					<p>Sign in and configure an FTP client to upload your application on the web:</p>
+					<ul>
+						<li><a>http://www.5gbfree.com</a></li>
+						<li><a>http://web-hosting.thetop10sites.com/</a></li>
+					</ul>
+				</section>
+				
+				<section style="text-align: left;">
+					<h4>That’s  it! </h4>
+					
+					<p>Any queries during the practicals can be sent to:</p>
+						<p><a><italic>jmwaura@jkuat.ac.ke </italic></a><br></p>
+					<p>I'll try to answer as fast as possible.</p>
+					<blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
+						&ldquo;Recommend: The Greatest Game Ever Played - 2005 Movie.&rdquo;
+					</blockquote>
+                                        
+					<small><q>Courtesy of <strong>reveal.js</strong></q></small>
+				</section>
+                                
+			</div>
+
+		</div>
+
+		<script src="../../lib/js/head.min.js"></script>
+		<script src="../../js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: '../../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../../plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

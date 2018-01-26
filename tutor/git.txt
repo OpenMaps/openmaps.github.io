@@ -1,0 +1,13 @@
+#changes on github
+cd /var/www/html/iconis/tutoria/css
+git status
+git add --all
+git commit -m "index"
+git push origin master
+
+#Changes on bitbucket/github
+cd /var/www/html/iconis/tutoria
+sudo git status
+sudo git add --all
+sudo git commit -m "varoius"
+sudo git push origin master

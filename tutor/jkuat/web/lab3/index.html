@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <style>
+        #mapid { height: 100vh; }
+    </style>
+</head>
+<body>
+<div id="mapid"></div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.4/MarkerCluster.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.4/MarkerCluster.Default.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.4/leaflet.markercluster.js"></script>
+
+<script>
+
+    var nLat = -1.28141;
+    var nLon =36.83111;
+    var mymap = L.map('mapid').setView([-1.28141,36.83111], 13);
+
+    var OpenStreetMap = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(mymap);
+
+
+    var markers = L.markerClusterGroup();
+    mymap.addLayer(markers);
+
+
+    var addCoord = function () {
+
+        setTimeout (function () {
+
+            for (var j = 0; j < 10; j++) {
+
+                var lat = nLat + Math.random() * 0.5,
+                    lon = nLon + Math.random() * 0.5;
+                markers.addLayer(L.marker([lat, lon]));
+            }
+        }, 0);
+    };
+
+    for (var i = 0; i < 100; i++) {
+        addCoord ();
+    };
+</script>
+</body>
+</html>

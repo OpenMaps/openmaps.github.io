@@ -1,0 +1,425 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Lab#4</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Courtesy of ...">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../../css/reveal.css">
+		<link rel="stylesheet" href="../../css/theme/white.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="../../lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../../css/print/pdf.css' : '../../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>D3 Map Visualization</h1>
+					<h3>Lab#4</h3>
+					<p>
+						<small>By <a href="http://www.openmaps.co.ke/">Mwaura Joshua</a> / <a href="https://twitter.com/@openmapsCo">@openmapsCo </a>on Twitter</small>
+					</p>
+				</section>
+
+				<section>
+					<h3>Lab Objectives</h3>
+					<ul>
+						<li>Understand how D3 can be used out of the box for mapping</li>
+						<li>Create a basic D3 map + geoJson</li>
+						<li>Add interactivity with event listeners</li>
+					</ul>
+					<p>Repository <a>https://github.com/OpenMaps/tutor/tree/master/jkuat/zips</a></p>
+				</section>
+
+				<section>
+					<h3>Overview of D3</h3>
+					<p>Slippy maps make use of cylindrical map projections to optimize the processing and serving of map tiles.</p>
+					<ul>
+						<li>Most existing tilesets are provided in the Web Mercator projection</li>
+						<li>D3, or data-driven documents, is a JavaScript library pioneered and maintained by Mike Bostock of the
+							NYTimes <a>(http://bost.ocks.org/mike)</a></li>
+						<li>Recognized as a leading data visualization library<a> http://d3js.org</a></li>
+
+					</ul>
+				</section>
+				
+				<section>
+					<h3>HTML Revisit</h3>
+					<p>HTML structures the content for web browsers. HTML page sample:</p>
+					<pre><code class="hljs" data-trim contenteditable>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Page Title</title>
+    </head>
+    <body>
+        <h1>Page Title</h1>
+        <p>Hallo Universe.</p>
+    </body>
+</html>
+					</code></pre>
+				</section>
+				
+				<section>
+					<h3>DOM</h3>
+					<p>Document Object Model refers to the hierarchical structure of HTML</p>
+					<ul>
+						<li>Each bracketed tag is an element, </li>
+						<li>We refer to elements’ relative relationships to each other in human terms:
+							<a>parent, child,sibling, ancestor, &amp; descendant.</a></li>
+					</ul><ul>
+					<li>e.g <a>body </a>is the parent element to both of its children, <a>h1 &amp; p </a>
+						(which are siblings to each other)</li>
+					<li>All <a>elements</a> on the page are descendants of html</li>
+					<li>Web browsers usually parse the DOM</li>
+					</ul>
+				</section>
+				
+				<section>
+					<h3>CSS</h3>
+					<p>Cascading Style Sheets are used to style the visual presentation of HTML pages</p>
+					<p>A simple CSS stylesheet looks like this:</p>
+					<pre><code class="hljs" data-trim contenteditable>
+body {
+	background-color: white;
+	color: black;
+}
+					</code></pre>
+				</section>
+				<section>
+					<h4>CSS (2)</h4>
+					<p>CSS styles consist of selectors &amp; rules</p>
+					<pre><code class="hljs" data-trim contenteditable>
+						h1, p /* Selects level 1 headings, Selects paragraphs*/
+						.caption /* Selects elements with class "caption" */
+						#subnav /* Selects element with ID "subnav" */
+					</code></pre>
+					<p>Rules are properties that, form the styles</p>
+					<pre><code class="hljs" data-trim contenteditable>
+margin: 10px;
+padding: 25px;
+					</code></pre>
+					<p>We connect selectors &amp; rules using curly brackets</p>
+					<pre><code class="hljs" data-trim contenteditable>
+p {
+font-size: 12px;
+line-height: 14px;}
+					</code></pre>
+					<p>D3 uses CSS-style selectors to identify the elements</p>
+				</section>
+				
+				<section>
+					<h3>JavaScript</h3>
+					<p>JavaScript is a dynamic scripting language, instructs changes in browser pages on load</p>
+					<p>Scripts are included as follows:</p>
+					<pre><code class="hljs" data-trim contenteditable>
+<body>
+<script type="text/javascript">
+alert("Hello, Universe!");
+</script>
+</body>
+<! -- or separate file -->
+<head>
+<title>Page Title</title>
+<script type="text/javascript" src="script.js"></script>
+</head>
+					</code></pre>
+				</section>
+				
+				<section>
+					<h3>SVG</h3>
+					<p>D3 renders visuals as Scalable Vector Graphics</p>
+					<p>SVG is a text-based image format, meaning;</p>
+					<ul><li><a>define SVG image by writing simple markup code</a></li></ul>
+					<pre><code class="hljs" data-trim contenteditable>
+<svg width="50" height="50">
+	<circle cx="25" cy="25" r="22" fill="blue" stroke="gray" stroke-width="2"/>
+</svg>
+					</code></pre>
+					<p><a>SVG scales up and down smoothly depending on zoom levels</a></p>
+				</section>
+				
+				<section>
+					<h3>D3 Sample</h3>
+					<p>Let's start with a simple HTML template</p>
+					<pre><code class="hljs" data-trim contenteditable>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>D3 Test</title>
+		<script type="text/javascript" src="d3/d3.v3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+		// Your beautiful D3 code will go here
+		d3.select("body")
+		  .append("p")
+		  .text("Hallo class!");
+		</script>
+	</body>
+</html>
+					</code></pre>
+				</section>
+				
+				<section>
+					<h4>Let’s walk through the code</h4>
+					<ul><li>Invoked D3's <a>select</a> method &amp; selected the body</li>
+						<li>Created a <a>new p</a> element &amp; appended it</li>
+						<li>Set the text content of that new, empty paragraph to <a>&ldquo;Hallo Class!&rdquo;</a></li>
+						<li>All of those crazy dots are just part of <strong>D3’s chain</strong> syntax</li>
+						<li>By <strong>&ldquo;chaining&rdquo;</strong> methods together with periods</li>
+					</ul>
+					<p><small><a>In a single line of code, multiple actions are combined</a></small></p>
+					<p><small><a>append()</a> creates new DOM elements specified &amp; appends it to the end of a selection it's acting on</small></p>
+				</section>
+				
+				<section>
+					<h4>What if D3 is Chainless?</h4>
+					<p>Our sample code rewritten without <a>chain syntax</a> as:</p>
+					<pre><code class="hljs" data-trim contenteditable>
+var body = d3.select("body");
+var p = body.append("p");
+p.text("Hallo class!");
+					</code></pre>
+				</section>
+				             
+				<!-- 1. nested vertical slides -->
+				<section>
+					<section>
+						<h3>D3 Mapping</h3>
+						
+						<a href="#" class="navigate-down">
+							<img width="88" height="118" data-src="https://openmaps.github.io/tutor/svg/arrow.png" alt="Down arrow">
+						</a>
+					</section>
+
+					<section>
+						<h4>1. HTML Template</h4>
+						<pre><code class="hljs" data-trim contenteditable>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Mapping with D3</title>
+	<script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+</head>
+<body>
+	<!-- Page elements and content go here. -->
+	<script>
+	// Our D3 code will go here.
+	</script>
+</body>
+</html>
+					</code></pre>
+					</section>
+
+					<section>
+						<h4>2. Load the Geographic Data.</h4>
+						<pre><code class="hljs" data-trim contenteditable>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Mapping with D3</title>
+	<script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+	<script src="d/ke-counties.js"></script>
+</head>
+<body>
+	<!-- Page elements and content go here. -->
+	<script>
+	// Our D3 code will go here.
+	</script>
+</body>
+</html>
+					</code></pre>
+					</section>
+					
+					 <section>
+						<h4>3. Create the SVG Canvas</h4>
+						 <p>Between the script tags, add the following to create our SVG canvas</p>
+						 <pre><code class="hljs" data-trim contenteditable>
+// Width and Height of the whole visualization
+var width = 700;
+var height = 580;
+
+// Create SVG
+var svg = d3.select( "body" )
+	.append( "svg" )
+	.attr( "width", width )
+	.attr( "height", height );
+// Append empty placeholder g element to the SVG
+// g will contain geometry elements
+var g = svg.append( "g" );
+						 </code></pre>
+					</section>
+					
+					<section>
+						<h4>4. Projections: D3, Projections, and GeoJSON</h4>
+						<p>D3 supports projections.</p>
+						<p>Convert GeoJSON data into screen coordinates based on the projection</p>
+						 <pre><code class="hljs" data-trim contenteditable>
+//create Kenya mercator projection, centered on Nairobi
+var projection = d3.geo.mercator()
+	.center([36.83111,0.28141])
+	.scale([3500])
+	.translate([width/2, height/2]);
+	
+//create svg path generator using the projection
+var geoPath = d3.geo.path()
+	.projection(projection);
+						 </code></pre>
+					</section>
+					
+					<section>
+						<h4>5. Bind the Data to the SVG Canvas</h4>
+						<ul>
+							<li>load the data from the JSON</li>
+							<li>Apply styling</li>
+							<li><a>d </a>attribute that defines the coordinates of a path</li>
+						</ul>
+						 <pre><code class="hljs" data-trim contenteditable>
+// D3. Select non-existent elements, 
+//bind the data, append the elements, and apply attributes
+svg.append("g")
+.selectAll("path")
+.data(counties.features)
+.enter()
+.append("path")
+.attr( "d", geoPath )
+.attr("class","county")
+.on("mouseover", function(d){
+d3.select("h2").text(d.properties.Ccodes+" : "+ d.properties.Name);
+d3.select(this).attr("class","county hover");
+})
+.on("mouseout", function(d){
+d3.select("h2").text("");
+d3.select(this).attr("class","county");
+});
+						 </code></pre>
+					</section>
+					
+					<section>
+						<h4>6. Make your style.css</h4>
+						<p>Now, work on CSS to position the component.</p>
+						 <pre><code class="hljs" data-trim contenteditable>
+<style>
+	body {
+	padding: 0;
+	margin: 0;
+	background: whitesmoke;
+	}
+	h1 {
+	position: absolute;
+	left: 20px;
+	top: 10px;
+	font-family: "Proxima Nova", Montserrat, sans-serif;
+	font-size: 2em;
+	font-weight: 100;
+	color: #bb5DAA;
+	}
+	h2 {
+	position: absolute;
+	left: 20px;
+	top: 10px;
+	font-family: "Proxima Nova", Montserrat, sans-serif;
+	font-size: 2em;
+	font-weight: 100;
+	color: #005DAA;
+	}
+	h2 {
+	top: 50px;
+	font-size: 1.6em;
+	}
+	.county {
+	stroke: #fff;
+	fill:#00FF00;
+	}
+	.hover {
+	fill: #00FFFF;
+	}
+</style>
+						 </code></pre>
+					</section>
+					
+					<section>
+						<h4>Let's Make Awesome Map</h4>
+						<p>The functionality of D3 allows creation of all kinds of fantastic maps and graphics.</p>
+						
+						<a href="#/2">
+							<img width="48" height="68" data-src="https://openmaps.github.io/tutor/svg/arrow.png" alt="Up arrow" style="transform: rotate(180deg); -webkit-transform: rotate(180deg);">
+						</a>
+					</section>
+				</section>
+				
+				<section style="text-align: left;">
+					<h4>That’s  it! </h4>
+					
+					<p>Any queries during the practicals can be sent to:</p>
+						<p><a><italic>jmwaura@jkuat.ac.ke </italic></a><br></p>
+					<p>I'll try to answer as fast as possible.</p>
+					<p>Kindly ...</p>
+					<blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
+						&ldquo;The Ascent of Money - 2008 Series.&rdquo;
+					</blockquote>
+					<blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
+						&ldquo;&amp; I wish you a happy coding life.&rdquo;
+					</blockquote>
+                                        
+					<small><q>Courtesy of <strong>reveal.js</strong></q></small>
+				</section>
+                                
+			</div>
+
+		</div>
+
+		<script src="../../lib/js/head.min.js"></script>
+		<script src="../../js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: '../../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../../plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

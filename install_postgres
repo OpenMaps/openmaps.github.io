@@ -1,0 +1,83 @@
+Step 1 - Installing PostgreSQL, phpPgAdmin and Apache2
+	sudo apt-get -y install postgresql postgresql-contrib phppgadmin
+
+Step 2 - Configure PostgreSQL user
+	sudo su
+	su - postgres
+	psql
+
+And then change the password for postgres role by typing:
+	\password postgres
+
+	ENTER YOUR PASSWORD
+
+Then enter \q to leave the psql command line.
+	exit
+
+Step 3 - Configure Apache2
+	cd /etc/apache2/conf-available/
+	gedit phppgadmin.conf
+
+Comment out the line --#Require local--- by adding a # in front of the line and add below the line --allow from all-- so that you can access from your browser.
+
+Step 4 - Configure phpPgAdmin
+
+	cd /etc/phppgadmin/
+	gedit config.inc.php
+
+Find the line-- $conf['extra_login_security'] = true; and change the value to false so you can login to phpPgAdmin with user postgres.
+
+Step 5 - Restart PostgreSQL and Apache2
+
+	systemctl restart postgresql
+	systemctl restart apache2
+
+Step 6 - Testing
+
+	Now access phpPgAdmin with your browser http://localhost/phppgadmin/.
+
+Installing android-studio:
+
+	sudo add-apt-repository ppa:paolorotolo/android-studio
+	sudo apt-get update
+	sudo apt-get install android-studio
+
+Install Oracle Java 7 in Ubuntu Or Linux Mint Via PPA Repository
+
+	sudo add-apt-repository ppa:webupd8team/java
+	sudo apt-get update
+	sudo apt-get install oracle-java7-installer
+
+Install Oracle Java 8 in Ubuntu Or Linux Mint Via PPA Repository
+	sudo add-apt-repository ppa:webupd8team/java
+	sudo apt-get update
+	sudo apt-get install oracle-java8-installer
+
+Switching between Oracle Java 8 and Java 7
+	sudo update-java-alternatives -s java-7-oracle
+	sudo update-java-alternatives -s java-8-oracle
+
+Setting Java environment variables
+	sudo apt-get install oracle-java8-set-default
+	sudo apt-get install oracle-java7-set-default
+
+sudo apt-get install postgis
+
+&gt;sudo apt-get install postgresql postgresql-contrib postgis
+> psql --version
+psql (PostgreSQL) 9.5.2
+
+> sudo psql --username=postgres --dbname=jobcue -c "CREATE EXTENSION postgis;"
+Password for user postgres:
+ERROR: could not open extension control file "/usr/share/postgresql/9.5/extension/postgis.control": No such file or directory
+
+>sudo apt-get install postgresql-9.5-postgis-2.0
+
+> sudo psql --username=postgres --dbname=jobcue -c "CREATE EXTENSION postgis;"
+Password for user postgres:
+ERROR: could not open extension control file "/usr/share/postgresql/9.5/extension/postgis.control": No such file or directory
+
+> sudo apt-get install postgresql-9.5-postgis-scripts
+> sudo psql --username=postgres --dbname=jobcue -c "CREATE EXTENSION postgis;"
+Password for user postgres:
+CREATE EXTENSION

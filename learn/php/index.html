@@ -1,0 +1,195 @@
+
+<!doctype html>
+<html>
+<head>
+	<title>OpenAgent</title>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
+	<link rel="stylesheet" type="text/css" href="style/style.css"/>
+	<link rel="stylesheet" type="text/css" href="style/bootstrap.min.css"/>
+	<!--
+	<link rel="stylesheet" type="text/css" href="style/custom.css"/>
+	<link rel="stylesheet" type="text/css" href="style/material.min.css"/>-->
+	<script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
+	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+	<style>
+		#map{
+		height: 550px;
+		width: 85%}
+	</style>
+</head>
+<body>
+	<div id="main" >
+		<div id="header">
+			<div id="logo">
+				<div id="logo_text" style="block">
+					<h1><a href="index.html">openAgent</a></h1>
+				</div>
+			</div>
+			<div id="menubar">
+				<ul id="menu">
+					<li>
+						<!--
+        				<form method="post" action="#" id="search_form">
+          					<a>
+            					<input class="search" type="text" name="search_field" value="Enter keywords....." />
+            					<input name="search" type="image" style="border: 0; margin: 0 0 -9px 5px;" src="style/search.png" alt="Search" title="Search" />
+          					</a>
+        				</form>-->
+	
+						<form class="form-inline" role="form" method="get" action="#">
+						<div class="form-group">
+							
+							<label class="wb-inv" for="exampleInputEmail2">Email address</label>
+							<input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email" />
+												
+						</div>
+						<div class="form-group">
+							<label class="wb-inv" for="exampleInputPassword2">Password</label>
+							<input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" />
+						</div>
+						<div class="checkbox">
+							<label><input type="checkbox" /> Remember me</label>
+						</div>
+						<button type="submit" class="btn btn-default">Sort</button>
+						</form>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="site_content">
+			<div class="sidebar">
+				<!---Insert side items-->
+				<h3>View layers</h3>
+					<h5>
+						<ul>
+							<li>Data Downloaded from Opendata kenya</li>
+							<li>Data editing done using QGIS</li>
+							<li>Database used: SQLite</li>
+						</ul>
+					</h5>
+			</div>
+			
+			<div class="content" >
+				<!---insert map here-->
+				 <div id="map" ></div>
+			</div>
+		</div>
+		<div id="content_footer"></div>
+		<div id="footer">
+			Copyright &copy OpenAgent | <a href="http://contact.html">Contact us to ad your property</a>
+		</div>
+	</div>
+	
+	
+	<script>
+		var map;
+
+		var mapquestOSM = new L.TileLayer("http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png", {
+			maxZoom: 17,
+			subdomains: ["otile1", "otile2", "otile3", "otile4"],
+			attribution: 'Tiles courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a>.'+ 
+			'Map data (c) <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> contributors, CC-BY-SA.'
+		});
+
+		var mapquestOAM = new L.TileLayer("http://{s}.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg", {
+			maxZoom: 17,
+			subdomains: ["oatile1", "oatile2", "oatile3", "oatile4"],
+			attribution: 'Tiles courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a>. '+
+			'Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency'
+		});
+		
+		var stamen = new L.TileLayer("http://tile.stamen.com/watercolor/{z}/{x}/{y}.png", {
+			maxZoom: 17,
+			attribution: 'Tiles courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a>. Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency'
+		});
+      
+    	var osm = new L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+			maxZoom: 17,
+      		subdomains: ["a","b","c"],
+			attribution:'&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+		 	 
+		});
+
+		// Bike Racks
+		var bikeRacksIcon = L.icon({
+			iconUrl: 'mapicons/icons/bicycleparking.png',
+			iconSize: [24, 28],
+			iconAnchor: [12, 28],
+			popupAnchor: [0, -25]
+		});
+		bikeRacks = new L.geoJson(null, {
+			pointToLayer: function (feature, latlng) {
+			  return L.marker(latlng, {
+			    icon: bikeRacksIcon,
+			    title: feature.properties.address
+			  });
+			},
+			onEachFeature: function (feature, layer) {
+			  if (feature.properties) {
+			    var content = '<table border="1" style="border-collapse:collapse;" cellpadding="2">' +
+			        '<tr>' + '<th>ID</th>' + '<td>' + feature.properties.id + '</td>' + '</tr>' +
+			        '<tr>' + '<th>Name</th>' + '<td>' + feature.properties.name + '</td>' + '</tr>' +
+			        '<tr>' + '<th>Address</th>' + '<td>' + feature.properties.address + '</td>' + '</tr>' +
+			        '<tr>' + '<th>Town</th>' + '<td>' + feature.properties.town + '</td>' + '</tr>' +
+			        '<table>';
+			    layer.bindPopup(content);
+			  }
+			}
+		});
+		$.getJSON("bikeRacks_geojson.php", function (data) {
+	  		bikeRacks.addData(data);
+		}).complete(function () {
+	    	map.fitBounds(bikeRacks.getBounds());
+		});
+
+	 	// Bus Routes
+		var busRoutes = new L.geoJson(null, {
+			style: function (feature) {
+				return {
+					color: '#9a9afc',
+					weight: 2,
+					opacity: 1
+				};
+			},
+			onEachFeature: function (feature, layer) {
+			  if (feature.properties) {
+			    var content = '<table border="1" style="border-collapse:collapse;" cellpadding="2">' +
+			          '<tr>' + '<th>CDTA Route</th>' + '<td>' + feature.properties.cdta_route + '</td>' + '</tr>' +
+			          '<tr>' + '<th>Route</th>' + '<td>' + feature.properties.var_route + '</td>' + '</tr>' +
+			          '<tr>' + '<th>Identification</th>' + '<td>' + feature.properties.var_identi + '</td>' + '</tr>' +
+			          '<tr>' + '<th>Description</th>' + '<td>' + feature.properties.var_descri + '</td>' + '</tr>' +
+			          '<table>';
+			    layer.bindPopup(content);
+			  }
+			}
+		});
+		$.getJSON("busRoutes_geojson.php", function (data) {
+		  busRoutes.addData(data);
+		});
+
+		map = new L.Map("map",{
+			layers: [mapquestOSM, bikeRacks]
+		});
+
+		var baseLayers = {
+			"MapQuest Streets": mapquestOSM,
+			"MapQuest Aerial": mapquestOAM,
+			"Watermapcolor": stamen,
+      		"openstreetmap": osm
+		};
+		var overlays = {
+			"Bike Racks": bikeRacks,
+			"Bus Routes": busRoutes
+		};
+
+		layersControl = new L.Control.Layers(baseLayers, overlays, {
+			collapsed: true
+		});
+
+		map.addControl(layersControl);
+	</script>
+</body>
+</html>
+

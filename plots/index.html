@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+	<!--Javascript-->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <title>PROPERTY LIMITED</title>  
+	<!--Icon-->
+        <link rel="shortcut icon" href="http://localhost/mapicons/xampp.ico" type="image/x-icon" /> 
+        <link rel="stylesheet" href="./css/w3.css" />
+	<!--Javascript-->
+        <script src="./js/modernizr.custom.63321.js"></script>
+	<!--More Styling-->
+       <style>
+        /* unvisited link */a:link {color: grey;}/* visited link */a:visited {color: green;}/* mouse over link */a:hover {color: hotpink;}
+        /* selected link */a:active {color: blue;}a{font-family:cursive;font-size:small;}
+        </style>
+    </head>
+<body>
+	<div class="w3-container">
+	<div class="om-top">
+		<a href="./index.html">
+			<strong>Property Portals</strong>
+		</a>
+	</div>
+	
+	<header class="w3-container w3-light-grey w3-round-large">
+        <div class="w3-container w3-grey">
+			<div class="w3-center"><p><h1>Cooperative Society Ltd</h1>
+				<h2>Geolocation of realty</h2></div>
+		</div>
+				
+		<nav class="om">
+			<a class="current-om" href="index.html">Home</a>
+			<a href="Registration.php">Register</a>
+			<a href="Login.php">Login</a>
+			<a href="Admin_Login.php">Admin</a> 
+		</nav>	
+          
+	</header>
+
+<div class="slideshow-container">
+
+	<div class="myfigure fade"><!--
+	<div class="numbertext">1 / 3</div>-->
+	<img src="./images/UtangeFront01.jpg" style="width:100%">
+	<div class="text"><span style="color:red">O</span>pen<span style="color:green">M</span>aps:</strong> Real Property</div>
+	</div>
+
+	<div class="myfigure fade">
+	<img src="./images/UtangeSurbabs.jpg" style="width:100%">
+	<div class="text"><span style="color:red">O</span>pen<span style="color:green">M</span>aps:</strong> Best of Houses</div>
+	</div>
+
+	<div class="myfigure fade">
+	<img src="./images/UtangeSurbabs02.jpg" style="width:100%">
+	<div class="text"><span style="color:red">O</span>pen<span style="color:green">M</span>aps:</strong> Flats of choice</div>
+	</div>
+
+</div>
+<br>
+
+<div style="text-align:center">
+	<span class="dot"></span>
+	<span class="dot"></span>
+	<span class="dot"></span>
+</div>
+<script>
+	var slideIndex = 0;
+	showSlides();
+
+	function showSlides() {
+		var i;
+		var slides = document.getElementsByClassName("myfigure");
+		var dots = document.getElementsByClassName("dot");
+		for (i = 0; i < slides.length; i++) {
+		slides[i].style.display = "none";
+		}
+		slideIndex++;
+		if (slideIndex> slides.length) {slideIndex = 1}
+		for (i = 0; i < dots.length; i++) {
+			dots[i].className = dots[i].className.replace(" active", "");
+		}
+		slides[slideIndex-1].style.display = "block";
+		dots[slideIndex-1].className += " active";
+		setTimeout(showSlides, 2000);
+	}
+</script>
+</body>
+</html>
